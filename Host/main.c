@@ -12,12 +12,6 @@
 #define INT_THRESHOLD 3000
 #define FRAC_THRESHOLD 0.3
 
-static inline int8 sgn(double val) {
- if (val < 0) return -1;
- if (val==0) return 0;
- return 1;
-}
-
 void PRNCode(int8 *array) {
   FILE* f = fopen("./PRNCode_1.txt", "r");
   int number = 0;
@@ -47,23 +41,24 @@ int main(int argc, const char *argv[]) {
 
   const int N = 32766;
   const int8 *data;
-  uint8 buffer[N];
+  uint8 buffer[32766];
   int8 prn1[N+1];
-  int8 circBufferI1[32766] = {0}, circBufferQ1[32766] = {0};
-  int8 circBufferI2[32766] = {0}, circBufferQ2[32766] = {0};
+  int8 bufferI1[32766] = {0}, bufferQ1[32766] = {0};
+  int8 bufferI2[32766] = {0}, bufferQ2[32766] = {0};
+  double pulseform1[32766*3] = {0}, pulseform2[32766*3] = {0};
+
+  double meanI1 = 0, meanI2 = 0, meanQ1 = 0, meanQ2 = 0;
   double xcorrI1 = 0, xcorrQ1 = 0;
-  double diff    = 0, meanDiff = 0;
+  double meanK1  = 0, meanK2 = 0;
+  double k1r = 0, k2r = 0;
+  double k1f = 0, k2f = 0;
   double k1 = 0, k2 = 0;
 
   int timeVal = 0, iteration = 0, lockCounter = 0 ;
-  int circIndex = 0, bufferOffset = 0, sampleOffset = 0;
+  int bufferOffset = 0, sampleOffset = 0;
   bool lock = false;
 
-  double meanI1Now = 0, meanI2Now = 0, meanQ1Now = 0, meanQ2Now = 0;
-  double meanI1Old = 0, meanI2Old = 0, meanQ1Old = 0, meanQ2Old = 0;
-  double slidingSum1 = 0, slidingSum2 = 0;
-  double peak1 = 0, peak2 = 0;
-  double pit1 = 0, pit2 = 0;
+
 
   printf("\n\n");
   printf("****************************************\n");
@@ -95,7 +90,7 @@ int main(int argc, const char *argv[]) {
         flSleep(250);
       }
       if ( !flag ) {
-        fprintf(stderr, "FPGALink device did not renumerate properly as %s\n", vp);
+        fprintf(stderr, "Device did not renumerate properly as %s\n", vp);
         goto cleanup;
       }
 
@@ -143,14 +138,13 @@ int main(int argc, const char *argv[]) {
       if (status) goto cleanup;
 
       for (int i = 0 ; i < N ; i++){
-        circBufferI1[i] = (double)( ( (buffer[i] >> 0) & 0x01) ) * 2 - 1;
-        circBufferI2[i] = (double)( ( (buffer[i] >> 1) & 0x01) ) * 2 - 1;
-        circBufferQ1[i] = (double)( ( (buffer[i] >> 4) & 0x01) ) * 2 - 1;
-        circBufferQ2[i] = (double)( ( (buffer[i] >> 5) & 0x01) ) * 2 - 1;
+        bufferI1[i] = (double)( ( (buffer[i] >> 0) & 0x01) ) * 2 - 1;
+        bufferI2[i] = (double)( ( (buffer[i] >> 1) & 0x01) ) * 2 - 1;
+        bufferQ1[i] = (double)( ( (buffer[i] >> 4) & 0x01) ) * 2 - 1;
+        bufferQ2[i] = (double)( ( (buffer[i] >> 5) & 0x01) ) * 2 - 1;
       }
-      //circIndex = (circIndex + 32766) % 98298;
 
-      
+      /* Uncommen this to save raw data
       if(iteration > 1)
         fwrite(buffer, 1, sizeof(buffer), fp);
       iteration++;
@@ -163,17 +157,18 @@ int main(int argc, const char *argv[]) {
         xcorrI1 = 0; xcorrQ1 = 0;
         for (int j = 0 ; j < 10 ; j++){
           for (int k = 0 ; k < 32767 ; k++){
-            xcorrI1 += prn1[k] * circBufferI1[(circIndex + bufferOffset + k + N) % 32766];
-            xcorrQ1 += prn1[k] * circBufferQ1[(circIndex + bufferOffset + k + N) % 32766];
+            xcorrI1 += prn1[k] * bufferI1[(bufferOffset + k + N) % 32766];
+            xcorrQ1 += prn1[k] * bufferQ1[(bufferOffset + k + N) % 32766];
           }
-          //printf("%f\n",sqrt(cdpValI1 * cdpValI1 + cdpValQ1 * cdpValQ1) );
+
           if ( sqrt(xcorrI1 * xcorrI1 + xcorrQ1 * xcorrQ1) > INT_THRESHOLD ){
             lock = true; lockCounter = 0;
-            printf("Locked @ %d (corr: %f)\n", bufferOffset, sqrt(xcorrI1 * xcorrI1 + xcorrQ1 * xcorrQ1));
+            printf("Locked @ %d (corr: %f)\n", bufferOffset,
+            sqrt(xcorrI1 * xcorrI1 + xcorrQ1 * xcorrQ1));
             break;
           } else {
             if (bufferOffset % 1000 == 0)
-              printf("%d\n", bufferOffset);
+            printf("%d\n", bufferOffset);
 
             bufferOffset++;
           }
@@ -182,67 +177,70 @@ int main(int argc, const char *argv[]) {
         //=============================//
         //==  Find Fractional Delay  ==//
         //=============================//
-        meanI1Now = 0; meanI2Now = 0;
-        meanQ1Now = 0; meanQ2Now = 0;
+        meanI1 = 0; meanI2 = 0;
+        meanQ1 = 0; meanQ2 = 0;
+        k1r = 0, k1f = 0;
+        k2r = 0, k2f = 0;
+        int prnOffset = 0, codeOffset = 0;
+        for (int k = 0 ; k < 32766*3; k++){
+          if (k + bufferOffset + prnOffset >= 32766)
+          prnOffset -= 32766;
+          if (k + codeOffset == 32767)
+          prnOffset -= 32767;
 
-        meanI1Old = 0; meanI2Old = 0;
-        meanQ1Old = 0; meanQ2Old = 0;
+          meanI1 = meanI1 * 0.9998 + 0.0002 * prn1[k + codeOffset] * bufferI1[bufferOffset + k + prnOffset];
+          meanQ1 = meanQ1 * 0.9998 + 0.0002 * prn1[k + codeOffset] * bufferQ1[bufferOffset + k + prnOffset];
+          meanI2 = meanI2 * 0.9998 + 0.0002 * prn1[k + codeOffset] * bufferI2[bufferOffset + k + prnOffset];
+          meanQ2 = meanQ2 * 0.9998 + 0.0002 * prn1[k + codeOffset] * bufferQ2[bufferOffset + k + prnOffset];
 
-        slidingSum1 = 0; slidingSum2 = 0;
-        peak1 = 0; peak2 = 0;
-        pit1  = 0; pit2  = 0;
+          pulseform1[k] = pulseform1[k] * 0.95 + 0.05 * sqrt(meanI1 * meanI1 + meanQ1 * meanQ1);
+          pulseform2[k] = pulseform2[k] * 0.95 + 0.05 * sqrt(meanI2 * meanI2 + meanQ2 * meanQ2);
 
-        for (int k = 0 ; k < 32767; k++){
-            meanI1Now = meanI1Now * 0.99 + 0.01 * prn1[k] * circBufferI1[(circIndex + bufferOffset + k + 32767) % 32766];
-            meanQ1Now = meanQ1Now * 0.99 + 0.01 * prn1[k] * circBufferQ1[(circIndex + bufferOffset + k + 32767) % 32766];
-            meanI2Now = meanI2Now * 0.99 + 0.01 * prn1[k] * circBufferI2[(circIndex + bufferOffset + k + 32767) % 32766];
-            meanQ2Now = meanQ2Now * 0.99 + 0.01 * prn1[k] * circBufferQ2[(circIndex + bufferOffset + k + 32767) % 32766];
-            slidingSum1 += meanI1Now * meanI1Now + meanQ1Now * meanQ1Now;
-            slidingSum2 += meanI2Now * meanI2Now + meanQ2Now * meanQ2Now;
-
-            meanI1Old = meanI1Old * 0.99 + 0.01 * prn1[k] * circBufferI1[(circIndex + bufferOffset + k) % 32766];
-            meanQ1Old = meanQ1Old * 0.99 + 0.01 * prn1[k] * circBufferQ1[(circIndex + bufferOffset + k) % 32766];
-            meanI2Old = meanI2Old * 0.99 + 0.01 * prn1[k] * circBufferI2[(circIndex + bufferOffset + k) % 32766];
-            meanQ2Old = meanQ2Old * 0.99 + 0.01 * prn1[k] * circBufferQ2[(circIndex + bufferOffset + k) % 32766];
-            slidingSum1 -= meanI1Old * meanI1Old + meanQ1Old * meanQ1Old;
-            slidingSum2 -= meanI2Old * meanI2Old + meanQ2Old * meanQ2Old;
-
-          if (slidingSum1 > peak1){
-            peak1 = slidingSum1;
-            k1 = k;
-          }
-          if (slidingSum2 > peak2){
-            peak2 = slidingSum2;
-            k2 = k;
+          if (pulseform1[k] > 0.2 && k1r == 0){
+            k1r = k;
+          } else if (pulseform1[k] < 0.3 && k1f == 0 && k1r != 0 && k > k1r + 30000 ){
+            k1f = k;
           }
 
-          if (slidingSum1 < pit1)
-            pit1 = slidingSum1;
-          if (slidingSum2 < pit2)
-            pit2 = slidingSum2;
+          if (pulseform2[k] > 0.2 && k2r == 0){
+            k2r = k;
+          } else if (pulseform2[k] < 0.3 && k2f == 0 && k2r != 0 && k > k2r + 30000 ){
+            k2f = k;
+          }
         }
 
-        if ( (peak1-pit1) > 5000 || (peak2-pit2) > 5000 ){
-          diff = k2 - k1;
-          if (abs(diff - meanDiff) < 1900) // Remove outliers
-            meanDiff = meanDiff * 0.99 + 0.01 * diff;
+
+        if ( (k1r != 0 && k1f != 0) && (k2r != 0 && k2f != 0) ){
+          k1 = (k1r + k1f) / 2;
+          k2 = (k2r + k1f) / 2;
+          meanK1 = meanK1 * 0.9 + 0.1 * (k1 + sampleOffset);
+          meanK2 = meanK2 * 0.9 + 0.1 * (k2 + sampleOffset);
 
           lockCounter = 0;
-          fprintf(fp_delay, "%d,%f,%f,%f,%f,%f\n", timeVal,
-                                         (double)(k1 + sampleOffset) / 3276700.0 / 32767.0 * 299792458.0,
-                                         (double)(k2 + sampleOffset) / 3276700.0 / 32767.0 * 299792458.0,
-                                                  diff               / 3276700.0 / 32767.0 * 299792458.0 * 100.0,
-                                                  meanDiff           / 3276700.0 / 32767.0 * 299792458.0 * 100.0,
-                                                  (diff - meanDiff)  / 3276700.0 / 32767.0 * 299792458.0 * 100.0);
+          fprintf(fp_delay, "%d,%f,%f,%f,%f\n", timeVal,
+          (k1 + sampleOffset) / 3276700.0 / 32766.0 * 299792458.0 * 100.0,
+          (k2 + sampleOffset) / 3276700.0 / 32766.0 * 299792458.0 * 100.0,
+           meanK1             / 3276700.0 / 32766.0 * 299792458.0 * 100.0,
+           meanK2             / 3276700.0 / 32766.0 * 299792458.0 * 100.0);
 
-          if (k1 < 10 || k2 < 10){
+          if (k1 < 16383 || k2 < 16383){
             bufferOffset -= 1;
             sampleOffset -= 32767;
-            //timeVal++;
-          }else if (k1 == 32767 && k2 == 32767){
+            timeVal++;
+
+            for (int k = 0 ; k < 32766*3; k++){
+              pulseform1[k] = 0;
+              pulseform2[k] = 0;
+            }
+          }else if (k1 == 81915 && k2 == 81915){
             bufferOffset += 1;
             sampleOffset += 32767;
-            //timeVal--;
+            timeVal--;
+
+            for (int k = 0 ; k < 32766*3; k++){
+              pulseform1[k] = 0;
+              pulseform2[k] = 0;
+            }
           }
 
         } else {
@@ -263,8 +261,6 @@ int main(int argc, const char *argv[]) {
         bufferOffset -= 32766;
         sampleOffset -= 2*32767;
       }
-
-      /*  */
     }
 
     if (fp == NULL)	{
