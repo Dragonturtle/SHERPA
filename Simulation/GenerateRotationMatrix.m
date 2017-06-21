@@ -1,0 +1,13 @@
+function A = GenerateRotationMatrix(m, type)
+if (type == 'q')
+    A = [[m(1)^2+m(2)^2-m(3)^2-m(4)^2, 2*m(1)*m(4)+2*m(2)*m(3), -2*m(1)*m(3)+2*m(2)*m(4)]; , ...
+        [-2*m(1)*m(4)+2*m(2)*m(3), m(1)^2-m(2)^2+m(3)^2-m(4)^2, 2*m(1)*m(2)+2*m(3)*m(4)]; , ...
+        [2*m(1)*m(3)+2*m(2)*m(4), -2*m(1)*m(2)+2*m(3)*m(4), m(1)^2-m(2)^2-m(3)^2+m(4)^2]];
+else if (type == 'e')
+    A = [[cos(m(3))*cos(m(1))-sin(m(3))*cos(m(2))*sin(m(1)), cos(m(3))*sin(m(1))+sin(m(3))*cos(m(2))*cos(m(1)), sin(m(3))*sin(m(2))]; ...
+        [-sin(m(3))*cos(m(1))-cos(m(3))*cos(m(2))*sin(m(1)), -sin(m(3))*sin(m(1))+cos(m(3))*cos(m(2))*cos(m(1)), cos(m(3))*sin(m(2))]; ...
+        [sin(m(2))*sin(m(1)), -sin(m(2))*cos(m(1)), cos(m(2))]];    
+else
+    A = eye(3);
+end
+end

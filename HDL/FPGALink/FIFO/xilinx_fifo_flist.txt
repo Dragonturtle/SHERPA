@@ -1,0 +1,16 @@
+# Output products list for <xilinx_fifo>
+_xmsgs/pn_parser.xmsgs
+xilinx_fifo/doc/fifo_generator_v9_3_readme.txt
+xilinx_fifo/doc/fifo_generator_v9_3_vinfo.html
+xilinx_fifo/doc/pg057-fifo-generator.pdf
+xilinx_fifo/fifo_generator_v9_3_readme.txt
+xilinx_fifo.asy
+xilinx_fifo.gise
+xilinx_fifo.ngc
+xilinx_fifo.sym
+xilinx_fifo.vhd
+xilinx_fifo.vho
+xilinx_fifo.xco
+xilinx_fifo.xise
+xilinx_fifo_flist.txt
+xilinx_fifo_xmdf.tcl

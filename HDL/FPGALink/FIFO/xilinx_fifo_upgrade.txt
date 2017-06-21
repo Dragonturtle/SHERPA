@@ -1,0 +1,5 @@
+Thu Apr  6 07:13:06 2017
+
+Upgraded xilinx_fifo from Fifo Generator 9.1 to FIFO Generator 9.3
+
+No changes made to parameter values.

@@ -1,0 +1,17 @@
+# Output products list for <si5351c_config_rom>
+_xmsgs/pn_parser.xmsgs
+si5351c_config_rom/blk_mem_gen_v7_3_readme.txt
+si5351c_config_rom/doc/blk_mem_gen_v7_3_vinfo.html
+si5351c_config_rom/doc/pg058-blk-mem-gen.pdf
+si5351c_config_rom.asy
+si5351c_config_rom.gise
+si5351c_config_rom.mif
+si5351c_config_rom.ngc
+si5351c_config_rom.sym
+si5351c_config_rom.vhd
+si5351c_config_rom.vho
+si5351c_config_rom.xco
+si5351c_config_rom.xise
+si5351c_config_rom_flist.txt
+si5351c_config_rom_xmdf.tcl
+summary.log

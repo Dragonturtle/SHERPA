@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kst version="2.0.9">
+    <data>
+        <source reader="ASCII file" updateType="0" file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt">
+            <properties vector="INDEX" interpretation="1" delimiters="#" columntype="2" columndelimiter="," headerstart="0" fields="0" readfields="false" usedot="true" columnwidthisconst="false" readunits="false" units="0" limitFileBuffer="false" limitFileBufferSize="0" useThreads="0" asciiTimeFormat="hh:mm:ss.zzz" dataRate="1" offsetDateTime="false" offsetFileDate="false" offsetRelavive="true" dateTimeOffset="2017-05-10T13:16:26Z" relativeOffset="0" nanValue="1" updateType="0"/> initialXNum="1" initialTNum="1" initialDSNum="1"
+        </source>
+    </data>
+    <variables>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 1" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="Sample #" initialVNum="1" initialXNum="1"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 2" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="RX1" initialVNum="2" initialXNum="15"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 3" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="RX2" initialVNum="3" initialXNum="29"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 4" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="RX1 Averaged" initialVNum="4" initialXNum="43"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 5" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="RX2 Averaged" initialVNum="5" initialXNum="57"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 6" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="RX1 Residuals" initialVNum="6" initialXNum="71"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 7" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="RX2 Residuals" initialVNum="7" initialXNum="85"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 8" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="Diff" initialVNum="8" initialXNum="99"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 9" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="Diff Averaged" initialVNum="9" initialXNum="113"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 10" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="Diff Residuals" initialVNum="10" initialXNum="127"/>
+    </variables>
+    <objects>
+        <histogram vector="RX1 Residuals (V6)" numberofbins="20" realtimeautobin="true" min="-401.5" max="-185.621" normalizationmode="0" initialVNum="11" initialXNum="141" initialHNum="1"/>
+        <histogram vector="RX2 Residuals (V7)" numberofbins="20" realtimeautobin="true" min="-401.653" max="-170.9" normalizationmode="0" initialVNum="13" initialXNum="167" initialHNum="2"/>
+        <histogram vector="Diff Residuals (V10)" numberofbins="20" realtimeautobin="true" min="-145.592" max="153.157" normalizationmode="0" initialVNum="15" initialXNum="193" initialHNum="3"/>
+        <plugin type="Linear Fit" initialVNum="17" initialXNum="219" initialPNum="1">
+            <inputvector type="X Vector" tag="Sample # (V1)"/>
+            <inputvector type="Y Vector" tag="RX1 (V2)"/>
+            <outputvector type="Fit" tag="Fit"/>
+            <outputvector type="Residuals" tag="Residuals"/>
+            <outputvector type="Parameters Vector" tag="Parameters Vector"/>
+            <outputvector type="Covariance" tag="Covariance"/>
+            <outputvector type="Lo Vector" tag="Lo Vector"/>
+            <outputvector type="Hi Vector" tag="Hi Vector"/>
+            <outputscalar type="chi^2/nu" tag="chi^2/nu"/>
+            <outputscalar type="Intercept" tag="Intercept"/>
+            <outputscalar type="Gradient" tag="Gradient"/>
+        </plugin>
+        <plugin type="Linear Fit" initialVNum="23" initialXNum="300" initialPNum="2">
+            <inputvector type="X Vector" tag="Sample # (V1)"/>
+            <inputvector type="Y Vector" tag="RX2 (V3)"/>
+            <outputvector type="Fit" tag="Fit"/>
+            <outputvector type="Residuals" tag="Residuals"/>
+            <outputvector type="Parameters Vector" tag="Parameters Vector"/>
+            <outputvector type="Covariance" tag="Covariance"/>
+            <outputvector type="Lo Vector" tag="Lo Vector"/>
+            <outputvector type="Hi Vector" tag="Hi Vector"/>
+            <outputscalar type="chi^2/nu" tag="chi^2/nu"/>
+            <outputscalar type="Intercept" tag="Intercept"/>
+            <outputscalar type="Gradient" tag="Gradient"/>
+        </plugin>
+    </objects>
+    <relations>
+        <curve xvector="Sample # (V1)" yvector="RX1 (V2)" color="#ff0000" alpha="127" headcolor="#4682b4" headalpha="255" barfillcolor="#501010" barfillalpha="255" haslines="true" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="2"/>
+        <curve xvector="Sample # (V1)" yvector="RX2 (V3)" color="#0000ff" alpha="131" headcolor="#aa0000" headalpha="255" barfillcolor="#0000aa" barfillalpha="255" haslines="true" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="3"/>
+        <curve xvector="Sample # (V1)" yvector="RX1 Averaged (V4)" color="#ff0000" alpha="255" headcolor="#000000" headalpha="255" barfillcolor="#aa00aa" barfillalpha="255" haslines="true" linewidth="2" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="4"/>
+        <curve xvector="Sample # (V1)" yvector="RX2 Averaged (V5)" color="#0000ff" alpha="255" headcolor="#350a0a" headalpha="255" barfillcolor="#0a350a" barfillalpha="255" haslines="true" linewidth="2" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="5"/>
+        <curve xvector="Sample # (V1)" yvector="Diff (V8)" color="#00ff00" alpha="128" headcolor="#0000ff" headalpha="255" barfillcolor="#008000" barfillalpha="255" haslines="true" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="6"/>
+        <curve xvector="Sample # (V1)" yvector="Diff Averaged (V9)" color="#00ff00" alpha="255" headcolor="#105010" headalpha="255" barfillcolor="#aa0000" barfillalpha="255" haslines="true" linewidth="2" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="8"/>
+        <curve xvector="RX1 Residuals:bin (V11)" yvector="RX1 Residuals:num (V12)" color="#ff0000" alpha="127" headcolor="#005500" headalpha="255" barfillcolor="#ff0000" barfillalpha="127" haslines="false" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="true" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="9"/>
+        <curve xvector="RX2 Residuals:bin (V13)" yvector="RX2 Residuals:num (V14)" color="#0000ff" alpha="131" headcolor="#aa00aa" headalpha="255" barfillcolor="#0000ff" barfillalpha="131" haslines="false" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="true" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="10"/>
+        <curve xvector="Diff Residuals:bin (V15)" yvector="Diff Residuals:num (V16)" color="#00ff00" alpha="255" headcolor="#350a0a" headalpha="255" barfillcolor="#00ff00" barfillalpha="128" haslines="false" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="true" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="11"/>
+        <curve xvector="Sample # (V1)" yvector="RX1 Unweighted Linear:Fit (V17)" color="#ef2929" alpha="255" headcolor="#000000" headalpha="255" barfillcolor="#000000" barfillalpha="255" haslines="true" linewidth="2" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="12"/>
+        <curve xvector="Sample # (V1)" yvector="RX2 Unweighted Linear:Fit (V23)" color="#0000ff" alpha="255" headcolor="#000000" headalpha="255" barfillcolor="#aa0000" barfillalpha="255" haslines="true" linewidth="2" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="-1" initialCNum="13"/>
+        <curve xvector="Sample # (V1)" yvector="RX1 Unweighted Linear:Residuals (V18)" color="#ff0000" alpha="127" headcolor="#350a0a" headalpha="255" barfillcolor="#0a350a" barfillalpha="255" haslines="true" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="14"/>
+        <curve xvector="Sample # (V1)" yvector="RX2 Unweighted Linear:Residuals (V24)" color="#0000ff" alpha="131" headcolor="#0000ff" headalpha="255" barfillcolor="#008000" barfillalpha="255" haslines="true" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="15"/>
+    </relations>
+    <graphics currentTab="0">
+        <view name="View &amp;1" width="1915" height="935" color="#ffffff" style="1">
+            <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="9.4" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="7" name="Plot">
+                <position x="957.5" y="235.25" z="499"/>
+                <rect x="0" y="0" width="954.5" height="464.5"/>
+                <relativesize width="0.4981732776617954" height="0.4962606837606838" centerx="0.7488256784968684" centery="0.49946581196581197" posx="0.4997390396659708" posy="0.2513354700854701" leftx="0.4997390396659708" lefty="0.7475961538461539" rightx="0.9979123173277662" righty="0.7475961538461539" fixaspect="false" lockpostodata="false"/>
+                <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                <pen style="1" width="1" miterlimit="2" cap="16" joinStyle="64">
+                    <brush color="#000000" alpha="1" style="1"/>
+                </pen>
+                <brush color="#ffffff" alpha="1" style="1"/>
+                <legend auto="true" title="" font="Sans,9,-1,5,50,0,0,0,0,0" fontscale="12" color="#000000" verticaldisplay="false" name="Legend">
+                    <position x="147.97540976723047" y="60.26387867647059" z="500"/>
+                    <rect x="0" y="0" width="0" height="0"/>
+                    <relativesize width="0" height="0" centerx="0.03216619243334387" centery="0.11221507352941176" posx="0.03216619243334387" posy="0.11221507352941176" leftx="0.03216619243334387" lefty="0.11221507352941176" rightx="0.03216619243334387" righty="0.11221507352941176" fixaspect="false" lockpostodata="false"/>
+                    <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                    <pen style="1" width="0" miterlimit="2" cap="16" joinStyle="64">
+                        <brush color="#000000" alpha="1" style="1"/>
+                    </pen>
+                    <brush color="#ffffff" alpha="1" style="1"/>
+                </legend>
+                <cartesianrender name="Cartesian Plot" type="1">
+                    <relation tag="RX1 Unweighted Linear:Residuals vs Sample # (C14)"/>
+                    <relation tag="RX2 Unweighted Linear:Residuals vs Sample # (C15)"/>
+                </cartesianrender>
+                <plotaxis id="xaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="true" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="false" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotlabel id="leftlabel" visible="true" overridetext="Linear Fit Residuals" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="rightlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="bottomlabel" visible="true" overridetext="Sample #" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <projectionrect x="32398" y="-95.79461791517679" width="999" height="224.07241017407796"/>
+            </plot>
+            <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="9.4" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="3" name="Plot">
+                <position x="480.34119999999996" y="699.7536" z="500"/>
+                <rect x="-477.2756" y="-232.2684" width="954.5512" height="464.5368"/>
+                <relativesize width="0.4982" height="0.4963" centerx="0.2507" centery="0.7476" posx="0.0015999999999999795" posy="0.49944999999999995" leftx="0.0015999999999999795" lefty="0.99575" rightx="0.4998" righty="0.99575" fixaspect="false" lockpostodata="false"/>
+                <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                <pen style="1" width="1" miterlimit="2" cap="16" joinStyle="64">
+                    <brush color="#000000" alpha="1" style="1"/>
+                </pen>
+                <brush color="#ffffff" alpha="1" style="1"/>
+                <legend auto="true" title="" font="Sans,9,-1,5,50,0,0,0,0,0" fontscale="12" color="#000000" verticaldisplay="false" name="Legend">
+                    <position x="-329.7698204812624" y="-166.0059083469171" z="500"/>
+                    <rect x="0" y="0" width="0" height="0"/>
+                    <relativesize width="0" height="0" centerx="0.03176397977037943" centery="0.11740122253720768" posx="0.03176397977037943" posy="0.11740122253720768" leftx="0.03176397977037943" lefty="0.11740122253720768" rightx="0.03176397977037943" righty="0.11740122253720768" fixaspect="false" lockpostodata="false"/>
+                    <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                    <pen style="1" width="0" miterlimit="2" cap="16" joinStyle="64">
+                        <brush color="#000000" alpha="1" style="1"/>
+                    </pen>
+                    <brush color="#ffffff" alpha="1" style="1"/>
+                </legend>
+                <cartesianrender name="Cartesian Plot" type="1">
+                    <relation tag="Diff vs Sample # (C6)"/>
+                    <relation tag="Diff Averaged vs Sample # (C8)"/>
+                </cartesianrender>
+                <plotaxis id="xaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="true" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="1" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="false" linecolor="#000000" linestyle="1" linewidth="1" curvemode="-2147483645"/>
+                </plotaxis>
+                <plotlabel id="leftlabel" visible="true" overridetext="Difference (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="rightlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="bottomlabel" visible="true" overridetext="Sample #" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <projectionrect x="32398" y="-107.032207875" width="999" height="320.44743675"/>
+            </plot>
+            <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="9.4" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="1" name="Plot">
+                <position x="480.34119999999996" y="235.21680000000003" z="500"/>
+                <rect x="-477.2756" y="-232.2684" width="954.5512" height="464.5368"/>
+                <relativesize width="0.4982" height="0.4963" centerx="0.2507" centery="0.2513" posx="0.0015999999999999795" posy="0.003150000000000022" leftx="0.0015999999999999795" lefty="0.49945000000000006" rightx="0.4998" righty="0.49945000000000006" fixaspect="false" lockpostodata="false"/>
+                <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                <pen style="1" width="0" miterlimit="2" cap="16" joinStyle="64">
+                    <brush color="#000000" alpha="1" style="1"/>
+                </pen>
+                <brush color="#ffffff" alpha="1" style="1"/>
+                <legend auto="true" title="" font="Sans,9,-1,5,50,0,0,0,0,0" fontscale="12" color="#000000" verticaldisplay="false" name="Legend">
+                    <position x="-325.5137574810098" y="-181.56083993213662" z="500"/>
+                    <rect x="0" y="0" width="0" height="0"/>
+                    <relativesize width="0" height="0" centerx="0.037006518425064396" centery="0.07705505691768827" posx="0.037006518425064396" posy="0.07705505691768827" leftx="0.037006518425064396" lefty="0.07705505691768827" rightx="0.037006518425064396" righty="0.07705505691768827" fixaspect="false" lockpostodata="false"/>
+                    <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                    <pen style="1" width="0" miterlimit="2" cap="16" joinStyle="64">
+                        <brush color="#000000" alpha="1" style="1"/>
+                    </pen>
+                    <brush color="#ffffff" alpha="1" style="1"/>
+                </legend>
+                <cartesianrender name="Cartesian Plot" type="1">
+                    <relation tag="RX1 vs Sample # (C2)"/>
+                    <relation tag="RX2 vs Sample # (C3)"/>
+                    <relation tag="RX1 Averaged vs Sample # (C4)"/>
+                    <relation tag="RX2 Averaged vs Sample # (C5)"/>
+                    <label text="[RX1 Unweighted Linear:Gradient (X299)] * x + [RX1 Unweighted Linear:Intercept (X298)]" scale="12" color="#000000" font="Sans,9,-1,5,50,0,0,0,0,0" fixleft="true" name="Label">
+                        <position x="581.9979645082344" y="66.51580717948715" z="500"/>
+                        <rect x="0" y="-33" width="398" height="33"/>
+                        <relativesize width="0.4969730425982151" height="0.08461538461538462" centerx="1.4033489741466556" centery="0.6782051282051282" posx="1.1548624528475482" posy="0.6358974358974359" leftx="1.1548624528475482" lefty="0.7205128205128205" rightx="1.6518354954457632" righty="0.7205128205128205" fixaspect="true" lockpostodata="false"/>
+                        <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                        <pen style="1" width="1" miterlimit="2" cap="16" joinStyle="64">
+                            <brush color="#000000" alpha="1" style="1"/>
+                        </pen>
+                        <brush color="#000000" alpha="1" style="0"/>
+                    </label>
+                </cartesianrender>
+                <plotaxis id="xaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="true" linecolor="#000000" linestyle="1" linewidth="1" curvemode="-1060753843"/>
+                </plotaxis>
+                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="1" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="false" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotlabel id="leftlabel" visible="true" overridetext="Distance (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="rightlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="bottomlabel" visible="true" overridetext="Sample #" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <projectionrect x="32398" y="-124602.11570349999" width="999" height="3598.4233949999907"/>
+            </plot>
+            <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="9.4" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="2" name="Plot">
+                <position x="1434.7008" y="815.9112" z="500"/>
+                <rect x="-477.2756" y="-116.1108" width="954.5512" height="232.2216"/>
+                <relativesize width="0.4982" height="0.2481" centerx="0.7488" centery="0.8717" posx="0.4997000000000001" posy="0.7476499999999999" leftx="0.4997000000000001" lefty="0.99575" rightx="0.9979" righty="0.99575" fixaspect="false" lockpostodata="false"/>
+                <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                <pen style="1" width="1" miterlimit="2" cap="16" joinStyle="64">
+                    <brush color="#000000" alpha="1" style="1"/>
+                </pen>
+                <brush color="#ffffff" alpha="1" style="1"/>
+                <legend auto="true" title="" font="Sans,9,-1,5,50,0,0,0,0,0" fontscale="12" color="#000000" verticaldisplay="false" name="Legend">
+                    <position x="-329.84334496891006" y="-73.40487882123162" z="500"/>
+                    <rect x="0" y="0" width="0" height="0"/>
+                    <relativesize width="0" height="0" centerx="0.031673413684178246" centery="0.11865521599264707" posx="0.031673413684178246" posy="0.11865521599264707" leftx="0.031673413684178246" lefty="0.11865521599264707" rightx="0.031673413684178246" righty="0.11865521599264707" fixaspect="false" lockpostodata="false"/>
+                    <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                    <pen style="1" width="0" miterlimit="2" cap="16" joinStyle="64">
+                        <brush color="#000000" alpha="1" style="1"/>
+                    </pen>
+                    <brush color="#ffffff" alpha="1" style="1"/>
+                </legend>
+                <cartesianrender name="Cartesian Plot" type="1">
+                    <relation tag="Diff Residuals:num vs Diff Residuals:bin (C11)"/>
+                </cartesianrender>
+                <plotaxis id="xaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="true" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="false" linecolor="#000000" linestyle="1" linewidth="1" curvemode="53406096"/>
+                </plotaxis>
+                <plotlabel id="leftlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="rightlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="toplabel" visible="true" overridetext="Histogram of Diff Residuals" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="bottomlabel" visible="true" overridetext="Difference Residuals (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <projectionrect x="-145.5921993815" y="6" width="298.74921376300006" height="143"/>
+            </plot>
+            <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="9.4" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="4" name="Plot">
+                <position x="1434.7008" y="119.1528" z="500"/>
+                <rect x="-477.2756" y="-116.1108" width="954.5512" height="232.2216"/>
+                <relativesize width="0.4982" height="0.2481" centerx="0.7488" centery="0.1273" posx="0.4997000000000001" posy="0.0032500000000000016" leftx="0.4997000000000001" lefty="0.25135" rightx="0.9979" righty="0.25135" fixaspect="false" lockpostodata="false"/>
+                <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                <pen style="1" width="1" miterlimit="2" cap="16" joinStyle="64">
+                    <brush color="#000000" alpha="1" style="1"/>
+                </pen>
+                <brush color="#ffffff" alpha="1" style="1"/>
+                <legend auto="true" title="" font="Sans,9,-1,5,50,0,0,0,0,0" fontscale="12" color="#000000" verticaldisplay="false" name="Legend">
+                    <position x="-329.84334496891006" y="-69.43882729319853" z="500"/>
+                    <rect x="0" y="0" width="0" height="0"/>
+                    <relativesize width="0" height="0" centerx="0.031673413684178246" centery="0.11865521599264707" posx="0.031673413684178246" posy="0.11865521599264707" leftx="0.031673413684178246" lefty="0.11865521599264707" rightx="0.031673413684178246" righty="0.11865521599264707" fixaspect="false" lockpostodata="false"/>
+                    <transform m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1"/>
+                    <pen style="1" width="0" miterlimit="2" cap="16" joinStyle="64">
+                        <brush color="#000000" alpha="1" style="1"/>
+                    </pen>
+                    <brush color="#ffffff" alpha="1" style="1"/>
+                </legend>
+                <cartesianrender name="Cartesian Plot" type="1">
+                    <relation tag="RX1 Residuals:num vs RX1 Residuals:bin (C9)"/>
+                    <relation tag="RX2 Residuals:num vs RX2 Residuals:bin (C10)"/>
+                </cartesianrender>
+                <plotaxis id="xaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="true" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                    <plotmarkers xaxis="false" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
+                </plotaxis>
+                <plotlabel id="leftlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="rightlabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="bottomlabel" visible="true" overridetext="RX Residuals (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="9.4" fontcolor="#000000" fontuseglobal="true"/>
+                <projectionrect x="-401.653448606" y="1" width="230.753735212" height="155"/>
+            </plot>
+        </view>
+    </graphics>
+</kst>
