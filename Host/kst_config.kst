@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kst version="2.0.9">
     <data>
-        <source reader="ASCII file" updateType="0" file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="src/delay.txt">
+        <source reader="ASCII file" updateType="0" file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt">
             <properties vector="INDEX" interpretation="1" delimiters="#" columntype="2" columndelimiter="," headerstart="0" fields="0" readfields="false" usedot="true" columnwidthisconst="false" readunits="false" units="0" limitFileBuffer="false" limitFileBufferSize="0" useThreads="0" asciiTimeFormat="hh:mm:ss.zzz" dataRate="1" offsetDateTime="false" offsetFileDate="false" offsetRelavive="true" dateTimeOffset="2017-05-10T13:16:26Z" relativeOffset="0" nanValue="1" updateType="0"/> initialXNum="1" initialTNum="1" initialDSNum="1"
         </source>
     </data>
     <variables>
-        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="src/delay.txt" field="Column 1" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="Cycle #" initialVNum="1" initialXNum="1"/>
-        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="src/delay.txt" field="Column 2" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="XCVR 1" initialVNum="2" initialXNum="15"/>
-        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="src/delay.txt" field="Column 3" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="XCVR 2" initialVNum="3" initialXNum="29"/>
-        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="src/delay.txt" field="Column 4" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="XCVR 1 Smooth" initialVNum="4" initialXNum="43"/>
-        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="src/delay.txt" field="Column 5" start="-1" count="1000" skip="-1" doAve="false" startUnits="" rangeUnits="" descriptiveNameIsManual="true" descriptiveName="XCVR 2 Smooth" initialVNum="5" initialXNum="57"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 1" start="-1" count="500" skip="-1" doAve="false" startUnits="frames" rangeUnits="frames" descriptiveNameIsManual="true" descriptiveName="Cycle #" initialVNum="1" initialXNum="1"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 2" start="-1" count="500" skip="-1" doAve="false" startUnits="frames" rangeUnits="frames" descriptiveNameIsManual="true" descriptiveName="XCVR 1" initialVNum="2" initialXNum="15"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 3" start="-1" count="500" skip="-1" doAve="false" startUnits="frames" rangeUnits="frames" descriptiveNameIsManual="true" descriptiveName="XCVR 2" initialVNum="3" initialXNum="29"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 4" start="-1" count="500" skip="-1" doAve="false" startUnits="frames" rangeUnits="frames" descriptiveNameIsManual="true" descriptiveName="XCVR 1 Smooth" initialVNum="4" initialXNum="43"/>
+        <datavector file="/home/luke/Desktop/sherpa_host/src/delay.txt" fileRelative="../../sherpa_host/src/delay.txt" field="Column 5" start="-1" count="500" skip="-1" doAve="false" startUnits="frames" rangeUnits="frames" descriptiveNameIsManual="true" descriptiveName="XCVR 2 Smooth" initialVNum="5" initialXNum="57"/>
     </variables>
     <objects>
         <equation expression="[XCVR 1 (V2)]-[XCVR 2 (V3)]" xvector="Cycle # (V1)" interpolate="true" descriptiveNameIsManual="true" descriptiveName="Difference" initialVNum="6" initialXNum="71" initialENum="1"/>
@@ -20,8 +20,8 @@
         </plugin>
         <equation expression="[XCVR 1 Smooth (V4)]-[XCVR 1 (V2)]" xvector="Cycle # (V1)" interpolate="true" descriptiveNameIsManual="true" descriptiveName="XCVR 1 Residuals" initialVNum="9" initialXNum="110" initialENum="2"/>
         <equation expression="[XCVR 2 Smooth (V5)]-[XCVR 2 (V3)]" xvector="Cycle # (V1)" interpolate="true" descriptiveNameIsManual="true" descriptiveName="XCVR 2 Residuals" initialVNum="11" initialXNum="136" initialENum="3"/>
-        <histogram vector="XCVR 1 Residuals:y (V10)" numberofbins="20" realtimeautobin="true" min="-208.514" max="118.781" normalizationmode="0" initialVNum="13" initialXNum="162" initialHNum="1"/>
-        <histogram vector="XCVR 2 Residuals:y (V12)" numberofbins="20" realtimeautobin="true" min="-219.963" max="123.432" normalizationmode="0" initialVNum="15" initialXNum="188" initialHNum="2"/>
+        <histogram vector="XCVR 1 Residuals:y (V10)" numberofbins="10" realtimeautobin="true" min="-36.3111" max="50.9719" normalizationmode="0" initialVNum="13" initialXNum="162" initialHNum="1"/>
+        <histogram vector="XCVR 2 Residuals:y (V12)" numberofbins="10" realtimeautobin="true" min="-221.503" max="110.677" normalizationmode="0" initialVNum="15" initialXNum="188" initialHNum="2"/>
         <plugin type="Linear Fit" initialVNum="17" initialXNum="214" initialPNum="2">
             <inputvector type="X Vector" tag="Cycle # (V1)"/>
             <inputvector type="Y Vector" tag="XCVR 1 (V2)"/>
@@ -49,7 +49,7 @@
             <outputscalar type="Gradient" tag="Gradient"/>
         </plugin>
         <equation expression="[Difference:y Cumulative Average:Avg(Y) (V8)]-[Difference:y (V7)]" xvector="Cycle # (V1)" interpolate="true" descriptiveNameIsManual="true" descriptiveName="difference deviation" initialVNum="29" initialXNum="376" initialENum="4"/>
-        <histogram vector="difference deviation:y (V30)" numberofbins="20" realtimeautobin="true" min="-13.3137" max="22.1501" normalizationmode="0" initialVNum="31" initialXNum="402" initialHNum="3"/>
+        <histogram vector="difference deviation:y (V30)" numberofbins="10" realtimeautobin="true" min="-115.583" max="278.123" normalizationmode="0" initialVNum="31" initialXNum="402" initialHNum="3"/>
     </objects>
     <relations>
         <curve xvector="Cycle # (V1)" yvector="XCVR 1 (V2)" color="#0000ff" alpha="128" headcolor="#000000" headalpha="255" barfillcolor="#000000" barfillalpha="255" haslines="true" linewidth="0" linestyle="0" haspoints="false" pointtype="0" pointdensity="0" pointsize="5" hasbars="false" ignoreautoscale="false" hashead="false" headtype="0" initialCNum="1"/>
@@ -103,7 +103,7 @@
                 <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="bottomlabel" visible="true" overridetext="Cycle #" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
-                <projectionrect x="8787" y="-148.64657129782987" width="999" height="363.76132570770125"/>
+                <projectionrect x="14357" y="-121.28407405849575" width="499" height="442.8109156127059"/>
             </plot>
             <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="8" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="2" name="Plot">
                 <position x="1434.7008" y="119.1528" z="500"/>
@@ -139,7 +139,7 @@
                 <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="bottomlabel" visible="true" overridetext="Direct Residuals (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
-                <projectionrect x="-219.96268473000035" y="1.9" width="343.3945114600006" height="130.2"/>
+                <projectionrect x="-221.50287091900006" y="-8.05" width="332.1799528379996" height="338.1"/>
             </plot>
             <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="8" globalfontcolor="#000000" showlegend="true" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="1" name="Plot">
                 <position x="480.34119999999996" y="235.21680000000003" z="500"/>
@@ -173,7 +173,7 @@
                 <plotaxis id="xaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
                     <plotmarkers xaxis="true" linecolor="#000000" linestyle="1" linewidth="1" curvemode="0"/>
                 </plotaxis>
-                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="0" timezonename="GMT" timezoneoffset="0">
+                <plotaxis id="yaxis" visible="true" log="false" reversed="false" autobaseoffset="true" baseoffset="false" forceoffsetmin="false" interpret="false" interpretation="1" display="4" displayformatstring="hh:mm:ss.zzz" majortickmode="5" minortickcount="5" autominortickcount="true" drawmajorticks="true" drawminorticks="true" drawmajorgridlines="true" drawminorgridlines="false" drawmajorgridlinecolor="#a0a0a4" drawminorgridlinecolor="#a0a0a4" drawmajorgridlinestyle="2" drawminorgridlinestyle="2" drawmajorgridlinewidth="1" drawminorgridlinewidth="1" significantdigits="9" rotation="0" zoommode="1" timezonename="GMT" timezoneoffset="0">
                     <plotmarkers xaxis="false" linecolor="#000000" linestyle="1" linewidth="1" curvemode="66206"/>
                 </plotaxis>
                 <plotlabel id="leftlabel" visible="true" overridetext="Distance (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
@@ -181,7 +181,7 @@
                 <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="bottomlabel" visible="true" overridetext="Cycle #" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
-                <projectionrect x="8787" y="14044.104173" width="999" height="350.153225"/>
+                <projectionrect x="14357" y="14555.459817550001" width="499" height="494.75896889999785"/>
             </plot>
             <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="8" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="3" name="Plot">
                 <position x="1434.7008" y="815.9112" z="500"/>
@@ -216,7 +216,7 @@
                 <plotlabel id="toplabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="bottomlabel" visible="true" overridetext="Difference Risiduals (cm)" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
-                <projectionrect x="-13.313653032083954" y="0" width="35.46371712042495" height="183"/>
+                <projectionrect x="-115.58295686453225" y="1" width="393.7062309538207" height="252"/>
             </plot>
             <plot tiedxzoom="false" tiedyzoom="false" leftlabelvisible="true" bottomlabelvisible="true" rightlabelvisible="true" toplabelvisible="true" globalfont="DejaVu Sans,12,-1,5,50,0,0,0,0,0" globalfontscale="8" globalfontcolor="#000000" showlegend="false" hidebottomaxislabel="false" hidetopaxislabel="false" hideleftaxislabel="false" hiderightaxislabel="false" numberaxislabelscale="true" initialPlotNum="5" name="Plot">
                 <position x="480.34119999999996" y="699.7536" z="500"/>
@@ -252,7 +252,7 @@
                 <plotlabel id="toplabel" visible="true" overridetext="" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="bottomlabel" visible="true" overridetext="Cycle #" autolabel="true" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
                 <plotlabel id="numberlabel" visible="true" overridetext="" autolabel="false" font="DejaVu Sans,12,-1,5,50,0,0,0,0,0" fontscale="8" fontcolor="#000000" fontuseglobal="true"/>
-                <projectionrect x="8787" y="-38.25438000000031" width="999" height="35.4620900000009"/>
+                <projectionrect x="14357" y="-395.8071749999999" width="499" height="374.5857670000005"/>
             </plot>
         </view>
     </graphics>

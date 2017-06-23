@@ -29,7 +29,7 @@ void PRNCode(int8 *array) {
 int main(int argc, const char *argv[]) {
   const char* vp  = "1d50:602b";
   const char* ivp = "1443:0007"; //Nexys 3 ID
-  const char* progConfig = "J:D0D2D3D4:../../sherpa_fpga/hdl/FPGA.xsvf";
+  const char* progConfig = "J:D0D2D3D4:../../HDL/FPGA.xsvf";
 
   const char *error = NULL;
   struct FLContext *handle = NULL;
@@ -212,7 +212,7 @@ int main(int argc, const char *argv[]) {
 
         if ( (k1r != 0 && k1f != 0) && (k2r != 0 && k2f != 0) ){
           k1 = (k1r + k1f) / 2;
-          k2 = (k2r + k1f) / 2;
+          k2 = (k2r + k2f) / 2;
           meanK1 = meanK1 * 0.9 + 0.1 * (k1 + sampleOffset);
           meanK2 = meanK2 * 0.9 + 0.1 * (k2 + sampleOffset);
 
